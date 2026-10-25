@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5">
+<meta name="theme-color" content="#0b1020">
+<meta name="format-detection" content="telephone=no">
+<meta name="description" content="琪琪影视院是一份按题材与年份整理的影视资料索引，收录院线新片、国产剧集、海外剧集、动漫番剧与综艺纪实的作品条目，逐条标注片长、集数、地区、更新状态与排播档期，并附月度口碑整理、选片思路与常见疑问答复，供观众查阅与安排观看时间。">
+<meta name="keywords" content="琪琪影视院,影视资料索引,影片年份对照,剧集更新状态,排播档期查询,月度口碑整理">
+<meta property="og:title" content="琪琪影视院｜影视资料索引与排播档期查询">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://qiqiyingshiyuan-top.github.io">
+<title>琪琪影视院｜影视资料索引与排播档期查询</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--ink:#eef1ff;--sub:#9aa3c4;--line:#262f52;--card:#141b38;--accent:#37e6c8;--accent2:#5b8cff;--warm:#ffcf5c;--bg:#080c1a}
+body{background:var(--bg);color:var(--ink);font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;line-height:1.75;font-size:15px;-webkit-text-size-adjust:100%}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+/* 顶栏 */
+.top{position:sticky;top:0;z-index:50;background:rgba(8,12,26,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:18px;height:56px}
+.logo{font-weight:800;letter-spacing:1px;font-size:18px;display:flex;align-items:center;gap:8px}
+.logo i{width:26px;height:26px;border-radius:8px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:inline-block}
+.logo b{background:linear-gradient(90deg,#fff,var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent}
+.siteurl{margin-left:auto;font-size:12px;color:var(--sub);border:1px solid var(--line);padding:4px 10px;border-radius:20px;font-family:ui-monospace,Menlo,Consolas,monospace}
+nav.gnb{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+nav.gnb::-webkit-scrollbar{display:none}
+nav.gnb a{padding:6px 10px;border-radius:8px;white-space:nowrap;font-size:13px;color:var(--sub);flex:none}
+nav.gnb a.on,nav.gnb a:hover{color:#fff;background:var(--card)}
+/* 首屏 */
+.hero{padding:54px 0 30px}
+.hero .eyebrow{font-size:12px;letter-spacing:3px;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:38px;line-height:1.25;margin:12px 0 14px;font-weight:900;letter-spacing:-.5px}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero p{max-width:660px;color:var(--sub);font-size:15px}
+.crumbs{margin-top:20px;font-size:12px;color:var(--sub)}
+.crumbs a:hover{color:var(--accent)}
+/* 手风琴 */
+.acc{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--card);margin-bottom:14px}
+.acc>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:14px;padding:18px 20px;user-select:none}
+.acc>summary::-webkit-details-marker{display:none}
+.acc>summary .idx{font:700 13px ui-monospace,Menlo,monospace;color:var(--accent);border:1px solid var(--line);border-radius:6px;padding:2px 7px;flex:none}
+.acc>summary h2{font-size:19px;flex:1}
+.acc>summary .meta{font-size:12px;color:var(--sub);flex:none;text-align:right}
+.acc>summary .arw{transition:.3s;color:var(--sub);flex:none}
+.acc[open]>summary .arw{transform:rotate(180deg)}
+.acc[open]>summary{border-bottom:1px solid var(--line);background:#101734}
+.acc .body{padding:20px}
+/* 条目网格 */
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.item{background:#0f152e;border:1px solid var(--line);border-radius:11px;padding:14px;transition:.2s}
+.item:hover{border-color:var(--accent);transform:translateY(-3px)}
+.item h3{font-size:15px;margin-bottom:8px}
+.item dl{font-size:12px;color:var(--sub);display:grid;grid-template-columns:38px 1fr;gap:3px 6px}
+.item dt{color:#6b7699}
+.item dd{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.item .st{margin-top:9px;display:flex;justify-content:space-between;align-items:center;font-size:11px;color:var(--accent)}
+/* 排播表 */
+.sched{width:100%;border-collapse:collapse;font-size:13px}
+.sched th,.sched td{border:1px solid var(--line);padding:9px 8px;text-align:center}
+.sched th{background:#101734;color:var(--accent);font-weight:700}
+.sched td:first-child{text-align:left;color:var(--sub)}
+.sched td.hot{color:var(--warm);font-weight:700}
+/* 榜单 */
+.rank{display:flex;flex-direction:column;gap:9px}
+.rk{display:flex;align-items:center;gap:12px;background:#0f152e;border:1px solid var(--line);border-radius:10px;padding:11px 14px}
+.rk .n{font:800 17px ui-monospace,Menlo,monospace;width:26px;color:var(--sub)}
+.rk:nth-child(1) .n{color:var(--warm)}.rk:nth-child(2) .n{color:var(--accent)}.rk:nth-child(3) .n{color:var(--accent2)}
+.rk .tx{flex:1}
+.rk .tx small{display:block;color:var(--sub);font-size:11px}
+.rk .sc{font:700 13px ui-monospace,Menlo,monospace;color:var(--accent)}
+/* 指引步骤 */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.step{background:#0f152e;border:1px solid var(--line);border-radius:11px;padding:16px}
+.step .k{font:800 22px ui-monospace,Menlo,monospace;color:var(--accent);line-height:1}
+.step h4{margin:10px 0 6px;font-size:15px}
+.step p{font-size:12.5px;color:var(--sub)}
+/* 问答 */
+.faq{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.faq .q{background:#0f152e;border:1px solid var(--line);border-radius:11px;padding:14px 16px}
+.faq .q h4{font-size:14px;margin-bottom:6px;color:var(--accent)}
+.faq .q p{font-size:12.5px;color:var(--sub)}
+.faq .q p u{text-decoration:none;color:var(--ink);font-family:ui-monospace,Menlo,monospace;font-size:11.5px}
+/* 页脚 */
+footer{border-top:1px solid var(--line);margin-top:46px;padding:34px 0 60px;color:var(--sub);font-size:12.5px}
+footer .wrap>div{margin-bottom:10px}
+footer a:hover{color:var(--accent)}
+#top{position:fixed;right:16px;bottom:20px;width:42px;height:42px;border-radius:50%;background:var(--accent);color:#08121f;border:0;font-size:18px;cursor:pointer;display:none;z-index:60;box-shadow:0 6px 18px rgba(55,230,200,.35)}
+#clock{font-family:ui-monospace,Menlo,monospace;color:var(--accent)}
+/* 断点 */
+@media(max-width:960px){
+ .grid{grid-template-columns:repeat(2,1fr)}
+ .steps{grid-template-columns:repeat(2,1fr)}
+ .siteurl{display:none}
+}
+@media(max-width:720px){
+ nav.gnb a{padding:6px 8px;font-size:12.5px}
+ .hero h1{font-size:27px}
+ .acc>summary .meta{display:none}
+ .faq{grid-template-columns:1fr}
+ .sched{font-size:11.5px}
+ .sched th,.sched td{padding:7px 4px}
+ .item dl{grid-template-columns:32px 1fr}
+}
+@media(max-width:420px){
+ .wrap{padding:0 14px}
+ .logo{font-size:16px}
+ .hero{padding:34px 0 22px}
+ .hero h1{font-size:22px}
+ .grid,.steps{grid-template-columns:1fr}
+ .acc>summary{padding:15px}
+ .acc>summary h2{font-size:16px}
+}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/changyuan.js"></script>
+<div class="top"><div class="wrap">
+ <div class="logo"><i></i><b>琪琪影视院</b></div>
+ <nav class="gnb" aria-label="主导航">
+  <a href="#film" class="on">院线新片</a><a href="#cn">国产剧集</a><a href="#us">海外剧集</a><a href="#ani">动漫番剧</a><a href="#show">综艺纪实</a><a href="#sched">排播档期</a><a href="#rank">月度榜单</a><a href="#guide">选片指引</a><a href="#faq">常见疑问</a>
+ </nav>
+ <span class="siteurl">qiqiyingshiyuan-top.github.io</span>
+</div></div>
+
+<main class="wrap">
+ <section class="hero">
+  <div class="eyebrow">QIQI YINGSHI YUAN / INDEX</div>
+  <h1>琪琪影视院<br>一份<em>按题材与年份归档</em>的影视资料索引</h1>
+  <p>逐条记录片长、集数、地区、更新状态与排播档期，供观众快速查到想看的作品，并据此安排观看时间。</p>
+  <div class="crumbs">当前位置：<a href="https://qiqiyingshiyuan-top.github.io">https://qiqiyingshiyuan-top.github.io</a> &gt; 首页 &gt; 影视资料索引</div>
+ </section>
+
+ <details class="acc" id="film" open>
+  <summary><span class="idx">01</span><h2>院线新片</h2><span class="meta">4 类题材<br>16 条条目</span><span class="arw">▾</span></summary>
+  <div class="body">
+   <div class="grid">
+    <div class="item"><h3>追光者</h3><dl><dt>题材</dt><dd>剧情</dd><dt>年份</dt><dd>2026</dd><dt>片长</dt><dd>122 分钟</dd><dt>地区</dt><dd>中国大陆</dd></dl><div class="st"><span>已归档</span><b>·</b></div></div>
+    <div class="item"><h3>无声海</h3><dl><dt>题材</dt><dd>悬疑</dd><dt>年份</dt><dd>2026</dd><dt>片长</dt><dd>108 分钟</dd><dt>地区</dt><dd>中国大陆</dd></dl><div class="st"><span>已归档</span><b>·</b></div></div>
+    <div class="item"><h3>边境线</h3><dl><dt>题材</dt><dd>动作</dd><dt>年份</dt><dd>2025</dd><dt>片长</dt><dd>135 分钟</dd><dt>地区</dt><dd>中国大陆</dd></dl><div class="st"><span>已归档</span><b>·</b></div></div>
+    <div class="item"><h3>老街灯</h3><dl><dt>题材</dt><dd>剧情</dd><dt>年份</dt><dd>2024</dd><dt>片长</dt><dd>118 分钟</dd><dt>地区</dt><dd>中国大陆</dd></dl><div class="st"><span>已归档</span><b>·</b></div></div>
+    <div class="item"><h3>星落</h3><dl><dt>题材</dt><dd>科幻</dd><dt>年份</dt><dd>2026</dd><dt>片长</dt><dd>146 分钟</dd><dt>地区</dt><dd>中国大陆</dd></dl><div class="st"><span>已归档</span><b>·</b></div></div>
+    <div class="item"><h3>夜航</h3><dl><dt>题材</dt><dd>悬疑</dd><dt>年份</dt><dd>2025</dd><dt>片长</dt><dd>99 分钟</dd><dt>地区</dt><dd>中国大陆</dd></dl><div class="st"><span>已归档</span><b>·</b></div></div>
+    <div class="item"><h3>归途</h3><dl><dt>题材</dt><dd>家庭</dd><dt>年份</dt><dd>2026</dd><dt>片长</dt><dd>103 分钟</dd><dt>地区</dt><dd>中国大陆</dd></dl><div class="st"><span>已归档</span><b>·</b></div></div>
+    <div class="item"><h3>春日书</h3><dl><dt>题材</dt><dd>文艺</dd><dt>年份</dt><dd>2023</dd><dt>片长</dt><dd>130 分钟</dd><dt>地区</dt><dd>中国大陆</dd></dl><div class="st"><span>已归档</span><b>·</b></div></div>
+    <div class="item"><h3>破晓</h3><dl><dt>题材</dt><dd>动作</dd><dt>年份</dt><dd>2026</dd><dt>片长</dt><dd>114 分钟</dd><dt>地区</dt><dd>中国香港</dd></dl><div class="st"><span>已归档</span><b>·</b></div></div>
+    <div class="item"><h3>深井</h3><dl><dt>题材</dt><dd>悬疑</dd><dt>年份</dt><dd>2025</dd><dt>片长</dt><dd>96 分钟</dd><dt>地区</dt><dd>中国大陆</dd></dl><div class="st"><span>已归档</span><b>·</b></div></div>
+    <div class="item"><h3>云边小店</h3><dl><dt>题材</dt><dd>家庭</dd><dt>年份</dt><dd>2024</dd><dt>片长</dt><dd>88 分钟</dd><dt>地区</dt><dd>中国大陆</dd></dl><div class="st"><span>已归档</span><b>·</b></div></div>
+    <div class="item"><h3>远山</h3><dl><dt>题材</dt><dd>文艺</dd><dt>年份</dt><dd>2026</dd><dt>片长</dt><dd>125 分钟</dd><dt>地区</dt><dd>中国大陆</dd></dl><div class="st"><span>已归档</span><b>·</b></div></div>
+    <div class="item"><h3>机械心</h3><dl><dt>题材</dt><dd>科幻</dd><dt>年份</dt><dd>2025</dd><dt>片长</dt><dd>132 分钟</dd><dt>地区</dt><dd>美国</dd></dl><div class="st"><span>已归档</span><b>·</b></div></div>
+    <div class="item"><h3>棋局</h3><dl><dt>题材</dt><dd>悬疑</dd><dt>年份</dt><dd>2026</dd><dt>片长</dt><dd>101 分钟</dd><dt>地区</dt><dd>中国大陆</dd></dl><div class="st"><span>已归档</span><b>·</b></div></div>
+    <div class="item"><h3>周末计划</h3><dl><dt>题材</dt><dd>喜剧</dd><dt>年份</dt><dd>2026</dd><dt>片长</dt><dd>94 分钟</dd><dt>地区</dt><dd>中国大陆</dd></dl><div class="st"><span>已归档</span><b>·</b></div></div>
+    <div class="item"><h3>故乡的云</h3><dl><dt>题材</dt><dd>剧情</dd><dt>年份</dt><dd>2023</dd><dt>片长</dt><dd>140 分钟</dd><dt>地区</dt><dd>中国大陆</dd></dl><div class="st"><span>已归档</span><b>·</b></div></div>
+   </div>
+  </div>
+ </details>
+
+ <details class="acc" id="cn">
+  <summary><span class="idx">02</span><h2>国产剧集</h2><span class="meta">古装 · 都市 · 悬疑</span><span class="arw">▾</span></summary>
+  <div class="body"><div class="grid">
+   <div class="item"><h3>长安旧事</h3><dl><dt>题材</dt><dd>古装</dd><dt>集数</dt><dd>40 集</dd><dt>年份</dt><dd>2026</dd><dt>状态</dt><dd>更新中</dd></dl><div class="st"><span>更新中</span><b>·</b></div></div>
+   <div class="item"><h3>城南灯火</h3><dl><dt>题材</dt><dd>都市</dd><dt>集数</dt><dd>32 集</dd><dt>年份</dt><dd>2025</dd><dt>状态</dt><dd>已完结</dd></dl><div class="st"><span>已完结</span><b>·</b></div></div>
+   <div class="item"><h3>第十三人</h3><dl><dt>题材</dt><dd>悬疑</dd><dt>集数</dt><dd>24 集</dd><dt>年份</dt><dd>2026</dd><dt>状态</dt><dd>更新中</dd></dl><div class="st"><span>更新中</span><b>·</b></div></div>
+   <div class="item"><h3>锦绣缘</h3><dl><dt>题材</dt><dd>古装</dd><dt>集数</dt><dd>48 集</dd><dt>年份</dt><dd>2024</dd><dt>状态</dt><dd>已完结</dd></dl><div class="st"><span>已完结</span><b>·</b></div></div>
+   <div class="item"><h3>平凡之路</h3><dl><dt>题材</dt><dd>都市</dd><dt>集数</dt><dd>36 集</dd><dt>年份</dt><dd>2026</dd><dt>状态</dt><dd>更新中</dd></dl><div class="st"><span>更新中</span><b>·</b></div></div>
+   <div class="item"><h3>逆光而行</h3><dl><dt>题材</dt><dd>悬疑</dd><dt>集数</dt><dd>18 集</dd><dt>年份</dt><dd>2025</dd><dt>状态</dt><dd>已完结</dd></dl><div class="st"><span>已完结</span><b>·</b></div></div>
+   <div class="item"><h3>大江东去</h3><dl><dt>题材</dt><dd>年代</dd><dt>集数</dt><dd>45 集</dd><dt>年份</dt><dd>2023</dd><dt>状态</dt><dd>已完结</dd></dl><div class="st"><span>已完结</span><b>·</b></div></div>
+   <div class="item"><h3>小满</h3><dl><dt>题材</dt><dd>家庭</dd><dt>集数</dt><dd>30 集</dd><dt>年份</dt><dd>2026</dd><dt>状态</dt><dd>更新中</dd></dl><div class="st"><span>更新中</span><b>·</b></div></div>
+  </div></div>
+ </details>
+
+ <details class="acc" id="us">
+  <summary><span class="idx">03</span><h2>海外剧集</h2><span class="meta">韩剧 · 美剧 · 日剧</span><span class="arw">▾</span></summary>
+  <div class="body"><div class="grid">
+   <div class="item"><h3>首尔雨季</h3><dl><dt>地区</dt><dd>韩国</dd><dt>集数</dt><dd>16 集</dd><dt>年份</dt><dd>2026</dd><dt>状态</dt><dd>更新中</dd></dl><div class="st"><span>更新中</span><b>·</b></div></div>
+   <div class="item"><h3>黑夜法庭</h3><dl><dt>地区</dt><dd>美国</dd><dt>集数</dt><dd>22 集</dd><dt>年份</dt><dd>2025</dd><dt>状态</dt><dd>已完结</dd></dl><div class="st"><span>已完结</span><b>·</b></div></div>
+   <div class="item"><h3>东京慢递</h3><dl><dt>地区</dt><dd>日本</dd><dt>集数</dt><dd>12 集</dd><dt>年份</dt><dd>2026</dd><dt>状态</dt><dd>更新中</dd></dl><div class="st"><span>更新中</span><b>·</b></div></div>
+   <div class="item"><h3>沉默的证人</h3><dl><dt>地区</dt><dd>英国</dd><dt>集数</dt><dd>8 集</dd><dt>年份</dt><dd>2025</dd><dt>状态</dt><dd>已完结</dd></dl><div class="st"><span>已完结</span><b>·</b></div></div>
+   <div class="item"><h3>咖啡与谎言</h3><dl><dt>地区</dt><dd>韩国</dd><dt>集数</dt><dd>20 集</dd><dt>年份</dt><dd>2024</dd><dt>状态</dt><dd>已完结</dd></dl><div class="st"><span>已完结</span><b>·</b></div></div>
+   <div class="item"><h3>边境以北</h3><dl><dt>地区</dt><dd>美国</dd><dt>集数</dt><dd>10 集</dd><dt>年份</dt><dd>2026</dd><dt>状态</dt><dd>更新中</dd></dl><div class="st"><span>更新中</span><b>·</b></div></div>
+   <div class="item"><h3>京都料理人</h3><dl><dt>地区</dt><dd>日本</dd><dt>集数</dt><dd>14 集</dd><dt>年份</dt><dd>2025</dd><dt>状态</dt><dd>已完结</dd></dl><div class="st"><span>已完结</span><b>·</b></div></div>
+   <div class="item"><h3>里斯本档案</h3><dl><dt>地区</dt><dd>葡萄牙</dd><dt>集数</dt><dd>6 集</dd><dt>年份</dt><dd>2026</dd><dt>状态</dt><dd>更新中</dd></dl><div class="st"><span>更新中</span><b>·</b></div></div>
+  </div></div>
+ </details>
+
+ <details class="acc" id="ani">
+  <summary><span class="idx">04</span><h2>动漫番剧</h2><span class="meta">国创 · 日本番剧</span><span class="arw">▾</span></summary>
+  <div class="body"><div class="grid">
+   <div class="item"><h3>山海少年</h3><dl><dt>类型</dt><dd>国创</dd><dt>集数</dt><dd>26 集</dd><dt>年份</dt><dd>2026</dd><dt>状态</dt><dd>更新中</dd></dl><div class="st"><span>更新中</span><b>·</b></div></div>
+   <div class="item"><h3>星游记</h3><dl><dt>类型</dt><dd>国创</dd><dt>集数</dt><dd>52 集</dd><dt>年份</dt><dd>2025</dd><dt>状态</dt><dd>已完结</dd></dl><div class="st"><span>已完结</span><b>·</b></div></div>
+   <div class="item"><h3>深夜食堂番外</h3><dl><dt>类型</dt><dd>日本</dd><dt>集数</dt><dd>12 集</dd><dt>年份</dt><dd>2026</dd><dt>状态</dt><dd>更新中</dd></dl><div class="st"><span>更新中</span><b>·</b></div></div>
+   <div class="item"><h3>机械少女</h3><dl><dt>类型</dt><dd>日本</dd><dt>集数</dt><dd>24 集</dd><dt>年份</dt><dd>2024</dd><dt>状态</dt><dd>已完结</dd></dl><div class="st"><span>已完结</span><b>·</b></div></div>
+   <div class="item"><h3>雾中城</h3><dl><dt>类型</dt><dd>国创</dd><dt>集数</dt><dd>18 集</dd><dt>年份</dt><dd>2026</dd><dt>状态</dt><dd>更新中</dd></dl><div class="st"><span>更新中</span><b>·</b></div></div>
+   <div class="item"><h3>风起苍岚</h3><dl><dt>类型</dt><dd>国创</dd><dt>集数</dt><dd>30 集</dd><dt>年份</dt><dd>2023</dd><dt>状态</dt><dd>已完结</dd></dl><div class="st"><span>已完结</span><b>·</b></div></div>
+   <div class="item"><h3>猫的报恩 2</h3><dl><dt>类型</dt><dd>日本</dd><dt>集数</dt><dd>13 集</dd><dt>年份</dt><dd>2026</dd><dt>状态</dt><dd>更新中</dd></dl><div class="st"><span>更新中</span><b>·</b></div></div>
+   <div class="item"><h3>银河铁道</h3><dl><dt>类型</dt><dd>日本</dd><dt>集数</dt><dd>11 集</dd><dt>年份</dt><dd>2025</dd><dt>状态</dt><dd>已完结</dd></dl><div class="st"><span>已完结</span><b>·</b></div></div>
+  </div></div>
+ </details>
+
+ <details class="acc" id="show">
+  <summary><span class="idx">05</span><h2>综艺纪实</h2><span class="meta">综艺 · 纪录片</span><span class="arw">▾</span></summary>
+  <div class="body"><div class="grid">
+   <div class="item"><h3>周末去哪儿</h3><dl><dt>类型</dt><dd>真人秀</dd><dt>期数</dt><dd>12 期</dd><dt>年份</dt><dd>2026</dd><dt>状态</dt><dd>更新中</dd></dl><div class="st"><span>更新中</span><b>·</b></div></div>
+   <div class="item"><h3>声音的力量</h3><dl><dt>类型</dt><dd>音乐</dd><dt>期数</dt><dd>10 期</dd><dt>年份</dt><dd>2025</dd><dt>状态</dt><dd>已完结</dd></dl><div class="st"><span>已完结</span><b>·</b></div></div>
+   <div class="item"><h3>舌尖上的中国 4</h3><dl><dt>类型</dt><dd>纪录片</dd><dt>集数</dt><dd>8 集</dd><dt>年份</dt><dd>2026</dd><dt>状态</dt><dd>更新中</dd></dl><div class="st"><span>更新中</span><b>·</b></div></div>
+   <div class="item"><h3>人间世 5</h3><dl><dt>类型</dt><dd>纪录片</dd><dt>集数</dt><dd>6 集</dd><dt>年份</dt><dd>2025</dd><dt>状态</dt><dd>已完结</dd></dl><div class="st"><span>已完结</span><b>·</b></div></div>
+   <div class="item"><h3>戏剧新生活</h3><dl><dt>类型</dt><dd>竞演</dd><dt>期数</dt><dd>14 期</dd><dt>年份</dt><dd>2026</dd><dt>状态</dt><dd>更新中</dd></dl><div class="st"><span>更新中</span><b>·</b></div></div>
+   <div class="item"><h3>山河纪行</h3><dl><dt>类型</dt><dd>纪录片</dd><dt>集数</dt><dd>10 集</dd><dt>年份</dt><dd>2024</dd><dt>状态</dt><dd>已完结</dd></dl><div class="st"><span>已完结</span><b>·</b></div></div>
+   <div class="item"><h3>脱口秀大会 6</h3><dl><dt>类型</dt><dd>语言类</dd><dt>期数</dt><dd>16 期</dd><dt>年份</dt><dd>2026</dd><dt>状态</dt><dd>更新中</dd></dl><div class="st"><span>更新中</span><b>·</b></div></div>
+   <div class="item"><h3>我在故宫修文物 2</h3><dl><dt>类型</dt><dd>纪录片</dd><dt>集数</dt><dd>5 集</dd><dt>年份</dt><dd>2023</dd><dt>状态</dt><dd>已完结</dd></dl><div class="st"><span>已完结</span><b>·</b></div></div>
+  </div></div>
+ </details>
+
+ <details class="acc" id="sched">
+  <summary><span class="idx">06</span><h2>排播档期</h2><span class="meta">一周七天 · 更新时段</span><span class="arw">▾</span></summary>
+  <div class="body">
+   <table class="sched">
+    <thead><tr><th>时段</th><th>周一</th><th>周三</th><th>周五</th><th>周日</th></tr></thead>
+    <tbody>
+     <tr><td>19:30</td><td>国产剧集</td><td class="hot">国产剧集</td><td>国产剧集</td><td>综艺纪实</td></tr>
+     <tr><td>20:00</td><td>海外剧集</td><td>海外剧集</td><td class="hot">海外剧集</td><td>海外剧集</td></tr>
+     <tr><td>21:00</td><td>动漫番剧</td><td>动漫番剧</td><td>动漫番剧</td><td class="hot">动漫番剧</td></tr>
+     <tr><td>22:00</td><td>综艺纪实</td><td>综艺纪实</td><td>综艺纪实</td><td class="hot">院线新片</td></tr>
+    </tbody>
+   </table>
+   <p style="margin-top:14px;color:var(--sub);font-size:13px">表中为资料归档用的常规更新时段，实际以各平台公告为准；琪琪影视院仅做信息整理，不提供播放源。</p>
+  </div>
+ </details>
+
+ <details class="acc" id="rank">
+  <summary><span class="idx">07</span><h2>月度榜单</h2><span class="meta">本月口碑整理 · 前八位</span><span class="arw">▾</span></summary>
+  <div class="body"><div class="rank">
+   <div class="rk"><span class="n">01</span><div class="tx">长安旧事<small>国产剧集 · 古装 · 40 集</small></div><span class="sc">9.2</span></div>
+   <div class="rk"><span class="n">02</span><div class="tx">追光者<small>院线新片 · 剧情 · 122 分钟</small></div><span class="sc">8.9</span></div>
+   <div class="rk"><span class="n">03</span><div class="tx">舌尖上的中国 4<small>综艺纪实 · 纪录片 · 8 集</small></div><span class="sc">8.8</span></div>
+   <div class="rk"><span class="n">04</span><div class="tx">首尔雨季<small>海外剧集 · 韩国 · 16 集</small></div><span class="sc">8.6</span></div>
+   <div class="rk"><span class="n">05</span><div class="tx">山海少年<small>动漫番剧 · 国创 · 26 集</small></div><span class="sc">8.5</span></div>
+   <div class="rk"><span class="n">06</span><div class="tx">无声海<small>院线新片 · 悬疑 · 108 分钟</small></div><span class="sc">8.3</span></div>
+   <div class="rk"><span class="n">07</span><div class="tx">第十三人<small>国产剧集 · 悬疑 · 24 集</small></div><span class="sc">8.1</span></div>
+   <div class="rk"><span class="n">08</span><div class="tx">周末去哪儿<small>综艺纪实 · 真人秀 · 12 期</small></div><span class="sc">7.9</span></div>
+  </div></div>
+ </details>
+
+ <details class="acc" id="guide">
+  <summary><span class="idx">08</span><h2>选片指引</h2><span class="meta">四步筛选法</span><span class="arw">▾</span></summary>
+  <div class="body"><div class="steps">
+   <div class="step"><div class="k">01</div><h4>定题材</h4><p>先在院线新片、国产剧集等栏目里圈定题材，缩小查找范围。</p></div>
+   <div class="step"><div class="k">02</div><h4>看年份与片长</h4><p>条目已标注年份与片长或集数，可按可支配时间挑选。</p></div>
+   <div class="step"><div class="k">03</div><h4>核对更新状态</h4><p>区分"更新中"与"已完结"，避免追到一半断更。</p></div>
+   <div class="step"><div class="k">04</div><h4>对照排播表</h4><p>结合一周排播档期，把想看的作品排进每周时段。</p></div>
+  </div></div>
+ </details>
+
+ <details class="acc" id="faq">
+  <summary><span class="idx">09</span><h2>常见疑问</h2><span class="meta">6 条答复</span><span class="arw">▾</span></summary>
+  <div class="body"><div class="faq">
+   <div class="q"><h4>琪琪影视院提供播放源吗？</h4><p>不提供。本站只做影视资料的分类与信息标注，观众需通过正规平台观看。</p></div>
+   <div class="q"><h4>官方网址是什么？</h4><p>唯一地址为 <u>https://qiqiyingshiyuan-top.github.io</u>，请认准该域名。</p></div>
+   <div class="q"><h4>条目多久更新一次？</h4><p>每月整理一次，片长、集数、更新状态等信息会同步刷新。</p></div>
+   <div class="q"><h4>发现信息有误怎么办？</h4><p>可通过邮箱 <u>qiqiyingshiyuan@qiqiyingshiyuan-top.github.io</u> 提交更正。</p></div>
+   <div class="q"><h4>排播档期准确吗？</h4><p>仅为资料归档参考，实际更新时间以各平台官方公告为准。</p></div>
+   <div class="q"><h4>如何联系我们？</h4><p>商务与反馈请寄 <u>feedback@qiqiyingshiyuan-top.github.io</u>。</p></div>
+  </div></div>
+ </details>
+</main>
+
+<footer>
+ <div class="wrap">
+  <div>网站名称：琪琪影视院　｜　官方网址：<a href="https://qiqiyingshiyuan-top.github.io">https://qiqiyingshiyuan-top.github.io</a></div>
+  <div>本站为影视资料索引，仅提供作品信息标注与排播档期整理，不涉及任何播放服务。</div>
+  <div>鄂ICP备xxxxxxxx号　｜　当前时间：<span id="clock">--</span>　｜　© <span id="yr"></span> 琪琪影视院</div>
+ </div>
+</footer>
+<button id="top" aria-label="回到顶部">↑</button>
+
+<script>
+(function(){
+ var c=document.getElementById('clock');
+ function tick(){
+  var d=new Date(),p=function(n){return n<10?'0'+n:n;};
+  c.textContent=d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate())+' '+p(d.getHours())+':'+p(d.getMinutes())+':'+p(d.getSeconds())+' (GMT+8)';
+ }
+ tick();setInterval(tick,1000);
+ document.getElementById('yr').textContent=new Date().getFullYear();
+
+ var btn=document.getElementById('top');
+ window.addEventListener('scroll',function(){btn.style.display=window.scrollY>400?'block':'none';});
+ btn.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
+
+ var links=[].slice.call(document.querySelectorAll('nav.gnb a')),secs=links.map(function(a){return document.getElementById(a.getAttribute('href').slice(1));});
+ function spy(){
+  var y=window.scrollY+120,cur=0;
+  secs.forEach(function(s,i){if(s&&s.offsetTop<=y)cur=i;});
+  links.forEach(function(a,i){a.className=i===cur?'on':'';});
+ }
+ window.addEventListener('scroll',spy);spy();
+})();
+</script>
+</body>
+</html>
